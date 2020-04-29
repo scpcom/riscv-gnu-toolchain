@@ -438,7 +438,8 @@ stamps/build-gdb-newlib: $(srcdir)/riscv-gdb
 		--disable-binutils \
 		--disable-ld \
 		--disable-gold \
-		--disable-gprof
+		--disable-gprof \
+		--disable-tui
 	$(MAKE) -C $(notdir $@)
 	$(MAKE) -C $(notdir $@) install
 	mkdir -p $(dir $@) && touch $@
