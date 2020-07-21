@@ -41,7 +41,7 @@ jobs:
         sed -i -e 's/make_tuple = riscv$(1)-unknown-$(2)/make_tuple = riscv-nuclei-$(2)/g' Makefile
     - name: Build Toolchain
       run: |
-        export MAKEFLAGS="-j4"
+        export MAKE="make -j"
         make linux
     - name: Strip Toolchain
       if: startsWith(matrix.os, 'ubuntu')
@@ -98,7 +98,7 @@ jobs:
         sed -i -e 's/make_tuple = riscv$(1)-unknown-$(2)/make_tuple = riscv-nuclei-$(2)/g' Makefile
     - name: Build Toolchain
       run: |
-        export MAKEFLAGS="-j4"
+        export MAKE="make -j"
         make
 #     - name: Check Toolchain
 #       run: |
@@ -189,7 +189,7 @@ jobs:
         sed -i -e 's/make_tuple = riscv$(1)-unknown-$(2)/make_tuple = riscv-nuclei-$(2)/g' Makefile
     - name: Build Toolchain
       run: |
-        export MAKE="make -j4"
+        export MAKE="make -j"
         source setup_gcc.sh
         make
     - name: Strip Toolchain
