@@ -27,8 +27,7 @@ jobs:
       if: startsWith(matrix.os, 'ubuntu')
       run: |
           sudo apt-get install autoconf automake autotools-dev bc bison \
-          build-essential curl dejagnu expect flex gawk gperf libgmp-dev \
-          libmpc-dev libmpfr-dev libtool patchutils texinfo
+          build-essential curl dejagnu expect flex gawk gperf libtool patchutils texinfo
     - name: Install Dependencies on macOS
       if: startsWith(matrix.os, 'macOS')
       run: |
@@ -84,8 +83,7 @@ jobs:
       if: startsWith(matrix.os, 'ubuntu')
       run: |
           sudo apt-get install autoconf automake autotools-dev bc bison \
-          build-essential curl dejagnu expect flex gawk gperf libgmp-dev \
-          libmpc-dev libmpfr-dev libtool patchutils texinfo
+          build-essential curl dejagnu expect flex gawk gperf libtool patchutils texinfo
     - name: Install Dependencies on macOS
       if: startsWith(matrix.os, 'macOS')
       run: |
@@ -166,8 +164,8 @@ jobs:
     - name: Install Dependencies on Ubuntu
       run: |
           sudo apt-get install autoconf automake autotools-dev bc bison \
-          build-essential curl dejagnu expect flex gawk gperf libgmp-dev \
-          libmpc-dev libmpfr-dev libtool patchutils texinfo expat libexpat1 zlib1g-dev libexpat-dev \
+          build-essential curl dejagnu expect flex gawk gperf \
+          libtool patchutils texinfo expat libexpat1 zlib1g-dev libexpat-dev \
           binutils-mingw-w64-i686 g++-mingw-w64-i686 gcc-mingw-w64-i686 mingw-w64-i686-dev \
           mingw-w64 mingw-w64-tools gdb-mingw-w64 python3 libz-mingw-w64-dev
     - name: Install third-parties libraries for Windows Build
