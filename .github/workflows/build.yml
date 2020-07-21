@@ -36,6 +36,8 @@ jobs:
     - name: Configure
       run: |
         ./configure --prefix=$PREFIX --with-arch=rv64gc --with-abi=lp64d --enable-multilib --with-cmodel=medany
+        cd ./riscv-gcc/ && ./contrib/download_prerequisites
+        cd -
     - name: Change toolchain name to Nuclei
       run: |
         sed -i -e 's/make_tuple = riscv$(1)-unknown-$(2)/make_tuple = riscv-nuclei-$(2)/g' Makefile
@@ -93,6 +95,8 @@ jobs:
       run: |
         PREFIX=${HOME}/riscv
         ./configure --with-arch=rv32gc --enable-multilib --prefix=$PREFIX --with-cmodel=medany
+        cd ./riscv-gcc/ && ./contrib/download_prerequisites
+        cd -
     - name: Change toolchain name to Nuclei
       run: |
         sed -i -e 's/make_tuple = riscv$(1)-unknown-$(2)/make_tuple = riscv-nuclei-$(2)/g' Makefile
