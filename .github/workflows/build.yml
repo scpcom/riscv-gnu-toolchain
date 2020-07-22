@@ -1,4 +1,4 @@
-name: Build Nuclei RISC-V GNU Toolchain
+name: Build GNU Toolchain
 
 on:
   push:
@@ -43,7 +43,7 @@ jobs:
         sed -i -e 's/make_tuple = riscv$(1)-unknown-$(2)/make_tuple = riscv-nuclei-$(2)/g' Makefile
     - name: Build Toolchain
       run: |
-        export MAKE="make -j"
+        export MAKE="make -j4"
         make linux
     - name: Strip Toolchain
       if: startsWith(matrix.os, 'ubuntu')
@@ -102,7 +102,7 @@ jobs:
         sed -i -e 's/make_tuple = riscv$(1)-unknown-$(2)/make_tuple = riscv-nuclei-$(2)/g' Makefile
     - name: Build Toolchain
       run: |
-        export MAKE="make -j"
+        export MAKE="make -j4"
         make
 #     - name: Check Toolchain
 #       run: |
@@ -181,7 +181,7 @@ jobs:
         tar -xjf expat-2.2.9.tar.bz2
         cd expat-2.2.9
         ./configure --host=i686-w64-mingw32 --prefix=/usr/i686-w64-mingw32/
-        make -j
+        make -j4
         sudo make install
     - name: Configure
       run: |
@@ -193,7 +193,7 @@ jobs:
         sed -i -e 's/make_tuple = riscv$(1)-unknown-$(2)/make_tuple = riscv-nuclei-$(2)/g' Makefile
     - name: Build Toolchain
       run: |
-        export MAKE="make -j"
+        export MAKE="make -j4"
         source setup_gcc.sh
         make
     - name: Strip Toolchain
