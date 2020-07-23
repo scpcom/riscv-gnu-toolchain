@@ -139,8 +139,6 @@ jobs:
     name: Build baremetal toolchain for Windows
 
     runs-on: ubuntu-16.04
-    env: 
-      PREFIX: /opt/riscv_windows
 
     steps:
     - uses: actions/checkout@v2
@@ -185,6 +183,7 @@ jobs:
         sudo make install
     - name: Configure
       run: |
+        PREFIX=${HOME}/riscv
         ./configure --with-arch=rv32gc --enable-multilib --prefix=$PREFIX --with-host=i686-w64-mingw32 --with-cmodel=medany
         cd ./riscv-gcc/ && ./contrib/download_prerequisites
         cd -
@@ -198,6 +197,7 @@ jobs:
         make
     - name: Strip Toolchain
       run: |
+          PREFIX=${HOME}/riscv
           cd $PREFIX
           cp /usr/i686-w64-mingw32/bin/*.dll bin/
           set +e
@@ -209,13 +209,15 @@ jobs:
           do
           i686-w64-mingw32-strip -s $i
           done
-    - name: Archive Toolchain
-      run: |
-        tar -jcf nuclei_riscv_gnu_toolchain_prebuilt_elf_windows.tar.bz2 -C ${{ env.PREFIX }} .
+#     - name: Archive Toolchain
+#       run: |
+#         PREFIX=${HOME}/riscv
+#         cd $(dirname $PREFIX)
+#         zip -9 -q -r nuclei_riscv_gnu_toolchain_prebuilt_elf_windows.zip $(basename $tooldir)
     - name: Upload built toolchain artifact
       uses: actions/upload-artifact@v2
       with:
         # Artifact name
         name: nuclei_riscv_gnu_toolchain_prebuilt_elf_windows
         # A file, directory or wildcard pattern that describes what to upload
-        path: nuclei_riscv_gnu_toolchain_prebuilt_elf_windows.tar.bz2
+        path: ${HOME}/riscv
