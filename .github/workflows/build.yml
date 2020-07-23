@@ -209,15 +209,15 @@ jobs:
           do
           i686-w64-mingw32-strip -s $i
           done
-#     - name: Archive Toolchain
-#       run: |
-#         PREFIX=${HOME}/riscv
-#         cd $(dirname $PREFIX)
-#         zip -9 -q -r nuclei_riscv_gnu_toolchain_prebuilt_elf_windows.zip $(basename $tooldir)
+    - name: Archive Toolchain
+      run: |
+        PREFIX=${HOME}/riscv
+        cd $PREFIX
+        zip -9 -q -r ../nuclei_riscv_gnu_toolchain_prebuilt_elf_windows.zip .
     - name: Upload built toolchain artifact
       uses: actions/upload-artifact@v2
       with:
         # Artifact name
         name: nuclei_riscv_gnu_toolchain_prebuilt_elf_windows
         # A file, directory or wildcard pattern that describes what to upload
-        path: ${HOME}/riscv
+        path: nuclei_riscv_gnu_toolchain_prebuilt_elf_windows.zip
