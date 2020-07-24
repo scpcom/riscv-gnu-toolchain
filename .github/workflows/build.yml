@@ -214,6 +214,7 @@ jobs:
         PREFIX=${HOME}/riscv
         cd $PREFIX
         zip -9 -q -r ../nuclei_riscv_gnu_toolchain_prebuilt_elf_windows.zip .
+        cd -
     - name: Upload built toolchain artifact
       uses: actions/upload-artifact@v2
       with:
