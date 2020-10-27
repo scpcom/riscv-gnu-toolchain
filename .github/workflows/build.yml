@@ -156,8 +156,7 @@ jobs:
           sudo apt-get install autoconf automake autotools-dev bc bison \
           build-essential curl dejagnu expect flex gawk gperf \
           libtool patchutils texinfo python3 zip \
-          binutils-mingw-w64-i686 g++-mingw-w64-i686 \
-          gcc-mingw-w64-i686 mingw-w64-i686-dev gdb-mingw-w64
+          mingw-w64 gdb-mingw-w64 libz-mingw-w64-dev
     - name: Install third-parties libraries for Windows Build
       run: |
         mkdir 3rd_libs
@@ -173,6 +172,8 @@ jobs:
         for i in `find /usr/i686-w64-mingw32/ -name "*.dll"`; do sudo mv $i $i.bak;  done
         [ -f /usr/x86_64-w64-mingw32/lib/zlib1.dll ] && sudo mv /usr/x86_64-w64-mingw32/lib/zlib1.dll /usr/x86_64-w64-mingw32/lib/zlib1.dll.bak
         [ -f /usr/i686-w64-mingw32/lib/libexpat.dll.a ] && sudo mv /usr/i686-w64-mingw32/lib/libexpat.dll.a /usr/i686-w64-mingw32/lib/libexpat.dll.a.bak
+        [ -f /usr/i686-w64-mingw32/lib/libz.dll.a ] && sudo mv /usr/i686-w64-mingw32/lib/libz.dll.a /usr/i686-w64-mingw32/lib/libz.dll.a.bak
+        [ -f /usr/x86_64-w64-mingw32/lib/libz.dll.a ] && sudo mv /usr/x86_64-w64-mingw32/lib/libz.dll.a /usr/x86_64-w64-mingw32/lib/libz.dll.a.bak
     - name: Configure
       run: |
         PREFIX=${HOME}/riscv
