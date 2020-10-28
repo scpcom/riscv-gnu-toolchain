@@ -1,6 +1,6 @@
 # Build RISC-V GNU Toolchain For Nuclei
 
-![Build Nuclei GNU Toolchain](https://github.com/riscv-mcu/riscv-gnu-toolchain/workflows/Build%20GNU%20Toolchain/badge.svg)
+[![Build Nuclei GNU Toolchain](https://github.com/riscv-mcu/riscv-gnu-toolchain/workflows/Build%20GNU%20Toolchain/badge.svg)](https://github.com/riscv-mcu/riscv-gnu-toolchain/actions)
 
 This guide is used to provide steps for build windows and linux version of **RISC-V GNU Toolchain for Nuclei**.
 
