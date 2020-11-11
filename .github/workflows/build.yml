@@ -23,6 +23,22 @@ jobs:
       with:
         submodules: recursive
         fetch-depth: 0
+    
+    - name: Tarball source
+      run: |
+        base=$(basename $PWD)
+        cd ..
+        tar czvf source.tar.gz --exclude-vcs -C $base .
+        mv source.tar.gz $base/
+    
+    - name: Upload source
+      uses: actions/upload-artifact@v2.2.0
+      with:
+        name: riscv_gnu_toochain_source
+        path: source.tar.gz
+      # continue build on error
+      continue-on-error: true
+    
     - name: Install Dependencies on Ubuntu
       if: startsWith(matrix.os, 'ubuntu')
       run: |
