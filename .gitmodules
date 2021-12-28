@@ -4,8 +4,8 @@
 	branch = rvv-0.7.1
 [submodule "riscv-gcc"]
 	path = riscv-gcc
-	url = ../gcc.git
-	branch = gcc-9-rvv
+	url = https://github.com/scpcom/riscv-gcc.git
+	branch = csky-gcc-9.3.0-rvv
 [submodule "riscv-glibc"]
 	path = riscv-glibc
 	url = https://github.com/riscv/riscv-glibc.git
