@@ -1,20 +1,20 @@
-T-HEAD GNU Compiler Toolchain
+XuanTie GNU Compiler Toolchain
 =============================
 
-This is the T-HEAD C and C++ cross-compiler. It supports two build modes:
+This is the XuanTie C and C++ cross-compiler. It supports two build modes:
 a generic ELF/Newlib toolchain and a more sophisticated Linux-ELF/glibc
 toolchain.
 
-Prebuild toolchain can be downloaded from resource center of OCC: https://occ.t-head.cn/community/download
+Prebuild toolchain can be downloaded from resource center of OCC: https://www.xrvm.cn/community/download
 
-For more information and getting technical support, please visit OCC website (Open Chip Community)：https://occ.t-head.cn/
+For more information and getting technical support, please visit OCC website (Open Chip Community)：ttps://www.xrvm.cn/
 
 ###  Getting the sources
 
 This repository uses submodules, but submodules will fetch automatically on demand,
 so `--recursive` or `git submodule update --init --recursive` is not needed.
 
-    $ git clone https://github.com/T-head-Semi/xuantie-gnu-toolchain
+    $ git clone https://github.com/XUANTIE-RV/xuantie-gnu-toolchain
 
 **Warning: git clone takes around 6.65 GB of disk and download size**
 

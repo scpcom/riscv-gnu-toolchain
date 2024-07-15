@@ -8,7 +8,7 @@ FAIL: gcc.target/riscv/interrupt-4.c
 
 FAIL: gcc.target/riscv/interrupt-mmode.c
 FAIL: gcc.target/riscv/interrupt-umode.c
-# Improve: make more inline by default same as T-Head toolchain v1
+# Improve: make more inline by default same as XuanTie toolchain v1
 FAIL: c-c++-common/torture/asm-inline.c
 # Improve: inhibit to generate builtins as memset/memcpy
 FAIL: gcc.dg/ipa/iinline-attr.c

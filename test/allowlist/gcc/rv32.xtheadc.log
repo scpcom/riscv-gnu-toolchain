@@ -18,7 +18,7 @@ FAIL: gcc.dg/torture/pr39074.c
 FAIL: gcc.dg/torture/pta-structcopy-1.c
 # Support vector
 XPASS: gcc.dg/tree-ssa/ssa-dom-cse-2.c
-# Improve: make more inline by default same as T-Head toolchain v1
+# Improve: make more inline by default same as XuanTie toolchain v1
 FAIL: c-c++-common/torture/asm-inline.c
 # Improve: inhibit to generate builtins as memset/memcpy
 FAIL: gcc.dg/ipa/iinline-attr.c

@@ -36,7 +36,7 @@ FAIL: gfortran.dg/analyzer/pr93993.f90
 #
 FAIL: gfortran.dg/pr45636.f90
 #
-# T-HEAD: Need review
+# XuanTiee: Need review
 #
 FAIL: gcc.dg/analyzer/dot-output.c
 #
