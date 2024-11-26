@@ -1,22 +1,22 @@
 [submodule "riscv-binutils"]
 	path = riscv-binutils
-	url = ../binutils-gdb.git
+	url = https://github.com/XUANTIE-RV/binutils-gdb.git
 [submodule "riscv-gcc"]
 	path = riscv-gcc
-	url = ../gcc.git
+	url = https://github.com/scpcom/riscv-gcc.git
 [submodule "riscv-glibc"]
 	path = riscv-glibc
-	url = ../glibc.git
+	url = https://github.com/XUANTIE-RV/glibc.git
 [submodule "riscv-dejagnu"]
 	path = riscv-dejagnu
 	url = https://github.com/riscv-collab/riscv-dejagnu.git
 	branch = riscv-dejagnu-1.6
 [submodule "riscv-newlib"]
 	path = riscv-newlib
-	url = ../newlib.git
+	url = https://github.com/XUANTIE-RV/newlib.git
 [submodule "riscv-gdb"]
 	path = riscv-gdb
-	url = ../binutils-gdb.git
+	url = https://github.com/XUANTIE-RV/binutils-gdb.git
 [submodule "qemu"]
 	path = qemu
-	url = ../qemu
+	url = https://github.com/XUANTIE-RV/qemu.git
