@@ -655,7 +655,7 @@ stamps/build-gcc-newlib-stage2: $(GCC_SRCDIR) $(GCC_SRC_GIT) stamps/build-newlib
 		$(CONFIGURE_GCC_DEP_LIBS) \
 		$(CONFIGURE_PKGVERSION) \
 		CXXFLAGS=$(GCC_CXXFLAGS) \
-		--disable-libgcctf \
+		--enable-libgcctf \
 		--prefix=$(INSTALL_DIR) \
 		--disable-shared \
 		--disable-threads \
