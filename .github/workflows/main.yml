@@ -1,0 +1,106 @@
+name: Build Docker Image
+on:
+  push:
+    tags:
+      - '*'
+    branches:
+      - '*'
+  workflow_dispatch:
+
+jobs:
+  build-docker-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+        - name: checkout
+          uses: actions/checkout@v4
+        - uses: dorny/paths-filter@v3
+          id: filter
+          with:
+            filters: |
+              src:
+              - 'scripts/host/**'
+              - '.github/**'
+        - name: Log into registry ghcr.io
+          if: (github.event_name != 'pull_request' && steps.filter.outputs.src == 'true') || startsWith(github.event.ref, 'refs/tags/v')
+          uses: docker/login-action@v3
+          with:
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+
+        - name: Extract Docker metadata
+          if: (github.event_name != 'pull_request' && steps.filter.outputs.src == 'true') || startsWith(github.event.ref, 'refs/tags/v')
+          id: meta
+          uses: docker/metadata-action@v5
+          with:
+            toolchains: ghcr.io/scpcom/riscv-gnu-toolchain
+
+        - name: Build and push Docker image
+          if: (github.event_name != 'pull_request' && steps.filter.outputs.src == 'true') || startsWith(github.event.ref, 'refs/tags/v')
+          id: build-and-push
+          uses: docker/build-push-action@v5
+          with:
+            context: .
+            file: ./scripts/host/Dockerfile
+            push: ${{ github.event_name != 'pull_request' }}
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
+        - name: pause
+          if: (github.event_name != 'pull_request' && steps.filter.outputs.src == 'true') || startsWith(github.event.ref, 'refs/tags/v')
+          run: sleep 120
+
+  build-toolchain:
+    strategy:
+      matrix:
+        targets: [riscv64]
+        libc: [elf, glibc, musl]
+        hosts: [x86_64]
+    runs-on: ubuntu-latest
+    needs: build-docker-image
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Get Board Configs
+        uses: actions/checkout@v4
+      - name: Build Toolchains
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/scpcom/riscv-gnu-toolchain:${{ github.ref_name }}
+          options: --privileged -v ${{ github.workspace }}/toolchains/:/output
+          run: |
+            df -h /opt
+            TARGET_MACH=${{ matrix.targets }} LIBC_SHORT=${{ matrix.libc }} HOST_MACH=${{ matrix.hosts }} GIT_REF=${{ github.ref_name }} ./make_toolchain.sh
+            df -h /opt
+            chmod 777 /output/
+      - name: Pack
+        run: |
+          cd toolchains/
+          ls -lah
+          echo "PACKAGE=${{ github.workspace }}/toolchains/*" >> $GITHUB_ENV
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: toolchain-files-${{ matrix.targets }}-${{ matrix.libc }}-${{ matrix.hosts }}
+          path: |
+            ${{env.PACKAGE}}
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    needs: [build-toolchain]
+    permissions: write-all
+    steps:
+      - name: download firmware
+        uses: actions/download-artifact@v4
+      - name: list toolchains
+        run: |
+          ls -lah
+          ls -lah toolchains-*/
+      - name: publish artifacts
+        uses: softprops/action-gh-release@v2
+        with:
+          append_body: true
+          files: |
+            toolchains-*/*
