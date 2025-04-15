@@ -1,0 +1,28 @@
+diff --git a/Makefile.in b/Makefile.in
+index 93f5d8e..d9ad48c 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -370,6 +370,7 @@ endif
+ 		$($@_LIBDIROPTS)
+ 	$(MAKE) -C $(notdir $@)
+ 	+flock $(SYSROOT)/.lock $(MAKE) -C $(notdir $@) install install_root=$(SYSROOT)
++	rm -f  $(notdir $@)/*/*.d $(notdir $@)/*/*.o $(notdir $@)/*/*.os
+ 	mkdir -p $(dir $@) && touch $@
+ 
+ stamps/build-gcc-linux-stage1: $(GCC_SRCDIR) $(GCC_SRC_GIT) stamps/build-binutils-linux \
+@@ -409,6 +410,7 @@ stamps/build-gcc-linux-stage1: $(GCC_SRCDIR) $(GCC_SRC_GIT) stamps/build-binutil
+ 	$(MAKE) -C $(notdir $@) inhibit-libc=true install-gcc
+ 	$(MAKE) -C $(notdir $@) inhibit-libc=true all-target-libgcc
+ 	$(MAKE) -C $(notdir $@) inhibit-libc=true install-target-libgcc
++	rm -f $(notdir $@)/gcc/insn-*.c $(notdir $@)/gcc/*.o $(notdir $@)/gcc/*/*.o
+ 	mkdir -p $(dir $@) && touch $@
+ 
+ stamps/build-gcc-linux-stage2: $(GCC_SRCDIR) $(GCC_SRC_GIT) $(addprefix stamps/build-glibc-linux-,$(GLIBC_MULTILIB_NAMES)) \
+@@ -444,6 +446,7 @@ stamps/build-gcc-linux-stage2: $(GCC_SRCDIR) $(GCC_SRC_GIT) $(addprefix stamps/b
+ 	$(MAKE) -C $(notdir $@)
+ 	$(MAKE) -C $(notdir $@) $(INSTALL)
+ 	cp -a $(INSTALL_DIR)/$(LINUX_TUPLE)/lib* $(SYSROOT)
++	rm -f $(notdir $@)/gcc/insn-*.c $(notdir $@)/gcc/*.o $(notdir $@)/gcc/*/*.o
+ 	mkdir -p $(dir $@) && touch $@
+ 
+ stamps/build-binutils-linux-native: $(BINUTILS_SRCDIR) $(BINUTILS_SRC_GIT) stamps/build-gcc-linux-stage2 stamps/check-write-permission
