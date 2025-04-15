@@ -57,9 +57,13 @@ if [ -e ${gcrel} ]; then
   exit 0
 fi
 
-git submodule update --init --recursive
-if [ ! -e riscv-musl ]; then
-  git submodule add -b thead-sdk-v1.1.2 https://github.com/scpcom/riscv-musl.git riscv-musl
+[ ! -e .git ] || git submodule update --init --recursive
+if [ $tclib = musl -a ! -e riscv-musl ]; then
+  if [ -e .git ]; then
+    git submodule add -b thead-sdk-v1.1.2 https://github.com/scpcom/riscv-musl.git riscv-musl
+  else
+    git clone --depth=1 -b thead-sdk-v1.1.2 https://github.com/scpcom/riscv-musl.git riscv-musl
+  fi
 fi
 
 export PREFIX=`pwd`/build

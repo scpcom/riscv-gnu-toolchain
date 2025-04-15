@@ -52,7 +52,9 @@ if [ ! -e $bs ]; then
       cp -p $f ${BUILDDIR}/
     fi
   done
-  cd ${BUILDDIR} && ./prepare-host.sh
+  #cd ${BUILDDIR} && ./prepare-host.sh
+  cd ${BUILDDIR}/toolchain && git apply ${SCRIPTDIR}/toolchain-cleanup-after-build.patch
+  rm -rf ${BUILDDIR}/toolchain/.git
   touch $bs
 fi
 
