@@ -97,10 +97,10 @@ jobs:
       - name: list toolchains
         run: |
           ls -lah
-          ls -lah toolchains-*/
+          ls -lah toolchain-*/
       - name: publish artifacts
         uses: softprops/action-gh-release@v2
         with:
           append_body: true
           files: |
-            toolchains-*/*
+            toolchain-*/*
