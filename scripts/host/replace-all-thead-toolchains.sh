@@ -10,8 +10,8 @@ cd $d ; d=`pwd` ; cd - > /dev/null
 # 3. Download or copy the archives to the host folder
 tcurl=$1
 
-tcver=2.8.1
-tcdat=20240502
+tcver=2.10.2
+tcdat=20241206
 
 harch=`uname -m`
 

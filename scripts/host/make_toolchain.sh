@@ -5,7 +5,7 @@ blue="\e[0;34m"
 end_color="\e[0m"
 
 GIT_URL="https://github.com/scpcom/riscv-gnu-toolchain"
-GIT_DEF="xuantie-gnu-toolchain-v2.8.x"
+GIT_DEF="xuantie-gnu-toolchain-v2.10.x"
 
 [ "X$GIT_REF" = "X" ] && GIT_REF="${GIT_DEF}"
 
