@@ -92,7 +92,7 @@ jobs:
     needs: [build-toolchain]
     permissions: write-all
     steps:
-      - name: download firmware
+      - name: download toolchain
         uses: actions/download-artifact@v4
       - name: list toolchains
         run: |
