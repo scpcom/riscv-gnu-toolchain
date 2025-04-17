@@ -55,6 +55,7 @@ if [ ! -e $bs ]; then
   #cd ${BUILDDIR} && ./prepare-host.sh
   cd ${BUILDDIR}/toolchain && git apply ${SCRIPTDIR}/toolchain-cleanup-after-build.patch
   rm -rf ${BUILDDIR}/toolchain/.git
+  rm -rf ${BUILDDIR}/toolchain/qemu
   touch $bs
 fi
 
