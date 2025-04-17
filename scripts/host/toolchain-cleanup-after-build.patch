@@ -2,11 +2,23 @@ diff --git a/Makefile.in b/Makefile.in
 index 93f5d8e..d9ad48c 100644
 --- a/Makefile.in
 +++ b/Makefile.in
-@@ -370,6 +370,7 @@ endif
+@@ -354,6 +354,9 @@ endif
  		$($@_LIBDIROPTS)
  	$(MAKE) -C $(notdir $@)
  	+flock $(SYSROOT)/.lock $(MAKE) -C $(notdir $@) install install_root=$(SYSROOT)
-+	rm -f  $(notdir $@)/*/*.d $(notdir $@)/*/*.o $(notdir $@)/*/*.os
++	rm -f $(notdir $@)/*/*.d $(notdir $@)/*/*.o $(notdir $@)/*/*.os
++	rm -f $(notdir $@)/*/*.a $(notdir $@)/*/*.so
++	rm -f $(notdir $@)/*.a $(notdir $@)/*.so
+ 	mkdir -p $(dir $@) && touch $@
+ 
+ stamps/build-glibc-linux-%: $(GLIBC_SRCDIR) $(GLIBC_SRC_GIT) stamps/build-gcc-linux-stage1 \
+@@ -370,6 +370,9 @@ endif
+ 		$($@_LIBDIROPTS)
+ 	$(MAKE) -C $(notdir $@)
+ 	+flock $(SYSROOT)/.lock $(MAKE) -C $(notdir $@) install install_root=$(SYSROOT)
++	rm -f $(notdir $@)/*/*.d $(notdir $@)/*/*.o $(notdir $@)/*/*.os
++	rm -f $(notdir $@)/*/*.a $(notdir $@)/*/*.so
++	rm -f $(notdir $@)/*.a $(notdir $@)/*.so
  	mkdir -p $(dir $@) && touch $@
  
  stamps/build-gcc-linux-stage1: $(GCC_SRCDIR) $(GCC_SRC_GIT) stamps/build-binutils-linux \
@@ -26,3 +38,35 @@ index 93f5d8e..d9ad48c 100644
  	mkdir -p $(dir $@) && touch $@
  
  stamps/build-binutils-linux-native: $(BINUTILS_SRCDIR) $(BINUTILS_SRC_GIT) stamps/build-gcc-linux-stage2 stamps/check-write-permission
+@@ -646,6 +646,7 @@ stamps/build-gcc-newlib-stage1: $(GCC_SRCDIR) $(GCC_SRC_GIT) stamps/build-binuti
+ 		CXXFLAGS_FOR_TARGET="-Os $(CXXFLAGS_FOR_TARGET)"
+ 	$(MAKE) -C $(notdir $@) all-gcc
+ 	$(MAKE) -C $(notdir $@) install-gcc
++	rm -f $(notdir $@)/gcc/insn-*.c $(notdir $@)/gcc/*.o $(notdir $@)/gcc/*/*.o
+ 	mkdir -p $(dir $@) && touch $@
+ 
+ stamps/build-newlib: $(NEWLIB_SRCDIR) $(NEWLIB_SRC_GIT) stamps/build-gcc-newlib-stage1
+@@ -752,6 +753,7 @@ stamps/build-gcc-newlib-stage2: $(GCC_SRCDIR) $(GCC_SRC_GIT) stamps/build-newlib
+ 		CXXFLAGS_FOR_TARGET="-Os $(CXXFLAGS_FOR_TARGET)"
+ 	$(MAKE) -C $(notdir $@)
+ 	$(MAKE) -C $(notdir $@) $(INSTALL)
++	rm -f $(notdir $@)/gcc/insn-*.c $(notdir $@)/gcc/*.o $(notdir $@)/gcc/*/*.o
+ 	mkdir -p $(dir $@) && touch $@
+ 
+ #
+@@ -841,6 +843,7 @@ stamps/build-gcc-musl-stage1: $(GCC_SRCDIR) $(GCC_SRC_GIT) stamps/build-binutils
+ 	$(MAKE) -C $(notdir $@) inhibit-libc=true install-gcc
+ 	$(MAKE) -C $(notdir $@) inhibit-libc=true all-target-libgcc
+ 	$(MAKE) -C $(notdir $@) inhibit-libc=true install-target-libgcc
++	rm -f $(notdir $@)/gcc/insn-*.c $(notdir $@)/gcc/*.o $(notdir $@)/gcc/*/*.o
+ 	mkdir -p $(dir $@) && touch $@
+ 
+ stamps/build-musl-linux-headers: $(MUSL_SRCDIR) stamps/build-gcc-musl-stage1
+@@ -958,6 +961,7 @@ stamps/build-gcc-musl-stage2: $(GCC_SRCDIR) $(GCC_SRC_GIT) $(addprefix stamps/bu
+ 	$(MAKE) -C $(notdir $@)
+ 	$(MAKE) -C $(notdir $@) $(INSTALL)
+ 	cp -a $(INSTALL_DIR)/$(MUSL_TUPLE)/lib* $(SYSROOT)
++	rm -f $(notdir $@)/gcc/insn-*.c $(notdir $@)/gcc/*.o $(notdir $@)/gcc/*/*.o
+ 	mkdir -p $(dir $@) && touch $@
+ 
+ .PHONY: report-gcc-musl
