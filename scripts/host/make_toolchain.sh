@@ -38,6 +38,7 @@ if [ ! -e $bs ]; then
   mkdir -p ${BUILDDIR}
   git clone -b ${GIT_DEF} ${GIT_URL} ${BUILDDIR}/toolchain
   cd ${BUILDDIR}/toolchain && git checkout ${GIT_REF}
+  cd ${BUILDDIR}/toolchain && git rm -r qemu
   cd ${BUILDDIR}/toolchain && git submodule update --init --recursive --depth=1
   touch ${BUILDDIR}/xuantie-gnu-toolchain-submodule-source.tar.gz
   touch $bs
