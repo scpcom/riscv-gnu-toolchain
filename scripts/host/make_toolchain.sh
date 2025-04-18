@@ -38,6 +38,7 @@ if [ ! -e $bs ]; then
   mkdir -p ${BUILDDIR}
   git clone -b ${GIT_DEF} ${GIT_URL} ${BUILDDIR}/toolchain
   cd ${BUILDDIR}/toolchain && git checkout ${GIT_REF}
+  cd ${BUILDDIR}/toolchain && git rm -r qemu
   cd ${BUILDDIR}/toolchain && git submodule update --init --recursive --depth=1
   touch ${BUILDDIR}/xuantie-gnu-toolchain-submodule-source.tar.gz
   touch $bs
@@ -55,7 +56,6 @@ if [ ! -e $bs ]; then
   #cd ${BUILDDIR} && ./prepare-host.sh
   cd ${BUILDDIR}/toolchain && git apply ${SCRIPTDIR}/toolchain-cleanup-after-build.patch
   rm -rf ${BUILDDIR}/toolchain/.git
-  rm -rf ${BUILDDIR}/toolchain/qemu
   touch $bs
 fi
 
